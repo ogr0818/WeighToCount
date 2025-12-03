@@ -1,0 +1,23 @@
+body {
+        background-color: #FFB6C1;
+    }
+
+.stApp {
+        background-color: #90EE90;
+    }
+
+div[data-testid="stTextInput"] input {
+    font-size: 24px;
+    height: 40px;
+}
+
+[data-testid="stTextInput"] label {
+    font-size: 44px;
+    color: red;
+}
+
+
+section[data-testid="stSidebar"] {
+    background-color: #FF00FF;
+    font-size: larger;
+}

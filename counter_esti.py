@@ -4,11 +4,17 @@ import streamlit as st
 from io import BytesIO, StringIO
 from datetime import date
 
+
+# 讀取外部 CSS
+with open("style.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 # 初始化 session_state 用來存所有輸入資料
 if "records" not in st.session_state:
     st.session_state["records"] = []
 
 st.title("藥包機顆數估算")
+
 id = st.text_input("請輸入藥盒編號： ", value='')
 
 df = pd.read_excel("machine_meta.xlsx")
@@ -47,7 +53,7 @@ if st.button("確定記錄此筆資料", type='primary'):
     st.session_state["records"].append(data_ls)
 
     st.write(f"{x[0][2]} 存入一筆資料")
-    st.write(f"總重：{wt} 共{tab_real}顆")
+    # st.write(f"總重：{wt} 共{tab_real}顆")
 
 st.divider()
 st.subheader("目前累積紀錄")
@@ -68,7 +74,4 @@ if len(st.session_state["records"]) > 0:
     )
 else:
     st.write("尚無資料")
-# with st.sidebar:
-#     st.markdown('<h2 style="color:blue;font-size:24px">存檔輸出(.xlsx)： </h2>', unsafe_allow_html=True)
-#     if st.button("Saved", type="primary"):
-#         st.write("finished")
+    
