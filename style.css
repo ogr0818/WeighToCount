@@ -1,5 +1,6 @@
 body {
         background-color: #FFB6C1;
+        font-size: 24px;
     }
 
 .stApp {
@@ -11,13 +12,20 @@ div[data-testid="stTextInput"] input {
     height: 40px;
 }
 
-[data-testid="stTextInput"] label {
-    font-size: 44px;
-    color: red;
+label[data-testid="stWidgetLabel"] {
+    font-size: 44px!important;
+    line-height: 48px !important;
+    max-height: 60px !important;
+    white-space: normal !important;
+    color: mediumblue;
 }
 
 
 section[data-testid="stSidebar"] {
     background-color: #FF00FF;
     font-size: larger;
+}
+
+#stTextInput{
+    font-size: 44px;
 }

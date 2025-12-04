@@ -13,12 +13,12 @@ with open("style.css") as f:
 if "records" not in st.session_state:
     st.session_state["records"] = []
 
-st.title("藥包機顆數估算")
+st.title("藥包機顆數紀錄表")
 
 id = st.text_input("請輸入藥盒編號： ", value='')
 
 df = pd.read_excel("machine_meta.xlsx")
-columns = ['編號', '品項代碼', '藥名', '重量', '顆數']
+columns = ['編號', '品項代碼', '藥名', '日期', '數量', '秤重']
 try:
     if id == "":
         pass
@@ -29,28 +29,41 @@ try:
         x = df.query('編號 == @num').values.tolist()
         st.write(f'品項代碼: {x[0][1]}')
         st.write(f'藥名: {x[0][2]}')
+        note = st.text_input("日期： ", value='')
         st.divider()
         regression = pd.read_excel("deming.xlsx")
         para = regression.query('編號 == @num')
 
         try:
-            wt = st.text_input("重量： ", value='')
+            tab_real = st.text_input("數量： ", value='')
+            if tab_real == '':
+                tab_real = 0
+            elif int(tab_real):
+                tab_real = int(tab_real)
+
+            wt = st.text_input("秤重： ", value='')
             if wt == '':
                 wt = 0
-            wt_float = float(wt)
-            tab_real = st.text_input("實際顆數： ", value='')
-            b0 = float(para.values.tolist()[0][1])
-            b1 = float(para.values.tolist()[0][2])
-            tab = np.round((float(wt) - b0)/ b1)
-            st.write(f'估計顆數： {int(tab)}')
+                wt_float = float(wt)
+
+            if float(wt):
+                # Deming regression
+                b0 = float(para.values.tolist()[0][1])
+                b1 = float(para.values.tolist()[0][2])
+                tab = np.round((float(wt) - b0)/ b1)
+                st.write(f'估計顆數： {int(tab)}')
+                if st.button("確定記錄此筆資料", type='primary'):
+                    data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
+                    st.session_state["records"].append(data_ls)
+
         except:
             st.write("資料格式不對！")
 except:
     st.write('請確認藥盒編號')
     st.divider()
-if st.button("確定記錄此筆資料", type='primary'):
-    data_ls = [num, x[0][1], x[0][2], wt, tab_real]
-    st.session_state["records"].append(data_ls)
+# if st.button("確定記錄此筆資料", type='primary'):
+#     data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
+#     st.session_state["records"].append(data_ls)
 
     st.write(f"{x[0][2]} 存入一筆資料")
     # st.write(f"總重：{wt} 共{tab_real}顆")
@@ -61,7 +74,7 @@ st.subheader("目前累積紀錄")
 if len(st.session_state["records"]) > 0:
     df_records = pd.DataFrame(st.session_state["records"],
                               columns=columns)
-    st.dataframe(df_records, use_container_width=True)
+    st.dataframe(df_records, width="stretch")
 
     # 提供下載
     buffer = BytesIO()
