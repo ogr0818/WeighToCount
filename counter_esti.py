@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-from io import BytesIO, StringIO
+from io import BytesIO
 from datetime import date
-
+import re
 
 # 讀取外部 CSS
 with open("style.css") as f:
@@ -22,6 +22,8 @@ columns = ['編號', '品項代碼', '藥名', '日期', '數量', '秤重']
 try:
     if id == "":
         pass
+    elif re.findall(r'\D', id):
+        st.write(f"{id} 藥盒編號不對")
     elif int(id) > 400 or (int(id) not in df['編號'].to_list()):
         st.write("不存在")
     elif int(id):
