@@ -1,31 +1,37 @@
-body {
+html, body, [class*="css"] {
         background-color: #FFB6C1;
-        font-size: 24px;
+        font-size: 1.4rem !important;
     }
 
 .stApp {
-        background-color: #90EE90;
+        background-color: #99D8B9;
     }
 
 div[data-testid="stTextInput"] input {
-    font-size: 24px;
+    font-size: 1.6rem;
+    font-weight:500;
+    vertical-align: middle !important;
+    padding-left: 20px;
     height: 40px;
 }
 
 label[data-testid="stWidgetLabel"] {
-    font-size: 44px!important;
-    line-height: 48px !important;
-    max-height: 60px !important;
+    font-size: 26px !important;
+    line-height: 40px !important;
+    max-height: 40px !important;
     white-space: normal !important;
     color: mediumblue;
 }
 
-
-section[data-testid="stSidebar"] {
-    background-color: #FF00FF;
-    font-size: larger;
+.stButton > button {
+    border-radius: 12px;
+    position: relative;
+    left: 70%;
 }
+/* div[data-testid="stWidgetLabel"] > div {
+    font-size: 66px !important;
+} */
 
-#stTextInput{
-    font-size: 44px;
+.st-emotion-cache-3qzj0x {
+    font-size: 38px !important;
 }

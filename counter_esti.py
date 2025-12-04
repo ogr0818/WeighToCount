@@ -13,7 +13,7 @@ with open("style.css") as f:
 if "records" not in st.session_state:
     st.session_state["records"] = []
 
-st.title("藥包機顆數紀錄表")
+st.title("藥包機顆數紀錄")
 
 id = st.text_input("請輸入藥盒編號： ", value='')
 
@@ -24,13 +24,13 @@ try:
         pass
     elif int(id) > 400 or (int(id) not in df['編號'].to_list()):
         st.write("不存在")
-    else:
+    elif int(id):
         num = int(id)
         x = df.query('編號 == @num').values.tolist()
-        st.write(f'品項代碼: {x[0][1]}')
-        st.write(f'藥名: {x[0][2]}')
+        st.markdown(f"<h5>品項代碼: {x[0][1]}</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h5>藥名: {x[0][2]}</h5>", unsafe_allow_html=True)
         note = st.text_input("日期： ", value='')
-        st.divider()
+        # st.divider()
         regression = pd.read_excel("deming.xlsx")
         para = regression.query('編號 == @num')
 
@@ -51,24 +51,16 @@ try:
                 b0 = float(para.values.tolist()[0][1])
                 b1 = float(para.values.tolist()[0][2])
                 tab = np.round((float(wt) - b0)/ b1)
-                st.write(f'估計顆數： {int(tab)}')
+                st.write(f'估計顆數： {int(tab)} 資料累積中...')
+                st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
                 if st.button("確定記錄此筆資料", type='primary'):
                     data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
                     st.session_state["records"].append(data_ls)
-
         except:
             st.write("資料格式不對！")
 except:
     st.write('請確認藥盒編號')
-    st.divider()
-# if st.button("確定記錄此筆資料", type='primary'):
-#     data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
-#     st.session_state["records"].append(data_ls)
-
-    st.write(f"{x[0][2]} 存入一筆資料")
-    # st.write(f"總重：{wt} 共{tab_real}顆")
-
-st.divider()
+    
 st.subheader("目前累積紀錄")
 
 if len(st.session_state["records"]) > 0:
@@ -86,5 +78,5 @@ if len(st.session_state["records"]) > 0:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 else:
-    st.write("尚無資料")
+    st.markdown(f'<h5 style="font-size:1.2rem;color:mediumblue;font-weight:normal;">尚無資料</h5>', unsafe_allow_html=True)
     
