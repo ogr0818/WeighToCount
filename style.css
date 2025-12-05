@@ -28,9 +28,6 @@ label[data-testid="stWidgetLabel"] {
     position: relative;
     left: 70%;
 }
-/* div[data-testid="stWidgetLabel"] > div {
-    font-size: 66px !important;
-} */
 
 .st-emotion-cache-3qzj0x {
     font-size: 38px !important;
