@@ -53,7 +53,7 @@ try:
                 b0 = float(para.values.tolist()[0][1])
                 b1 = float(para.values.tolist()[0][2])
                 tab = np.round((float(wt) - b0)/ b1)
-                st.write(f'估計顆數： {int(tab)} 資料累積中...')
+                st.markdown(f'<p style="font-size:24px;">估計顆數：<strong> {int(tab)} 顆</strong> (資料累積中...)</p>', unsafe_allow_html=True)
                 st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
                 if st.button("確定記錄此筆資料", type='primary'):
                     data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
