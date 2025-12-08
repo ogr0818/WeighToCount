@@ -13,7 +13,7 @@ with open("style.css") as f:
 if "records" not in st.session_state:
     st.session_state["records"] = []
 
-st.title("藥包機顆數紀錄")
+st.title("藥包機秤重轉顆數")
 
 id = st.text_input("請輸入藥盒編號： ", value='')
 
