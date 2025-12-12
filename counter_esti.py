@@ -35,7 +35,7 @@ try:
         # st.divider()
         regression = pd.read_excel("deming.xlsx")
         para = regression.query('編號 == @num')
-
+        
         try:
             tab_real = st.text_input("數量： ", value='')
             if tab_real == '':
@@ -49,20 +49,24 @@ try:
                 wt_float = float(wt)
 
             if float(wt):
+                if para.empty:
+                    st.markdown(f'<p style="font-size:24px;">暫時無法估計顆數</p>', unsafe_allow_html=True)
+
                 # Deming regression
-                b0 = float(para.values.tolist()[0][1])
-                b1 = float(para.values.tolist()[0][2])
-                tab = np.round((float(wt) - b0)/ b1)
-                # st.markdown(f'<p style="font-size:24px;">估計顆數：<strong> {int(tab)} 顆</strong> (資料累積中...)</p>', unsafe_allow_html=True)
-                # st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
-                if st.button("確定記錄此筆資料", type='primary'):
-                    data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
-                    st.session_state["records"].append(data_ls)
-                
-                st.markdown(f'<p style="font-size:24px;">估計顆數：<strong> {int(tab)} 顆</strong> (資料累積中...)</p>', unsafe_allow_html=True)
-                st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
+                else:
+                    b0 = float(para.values.tolist()[0][1])
+                    b1 = float(para.values.tolist()[0][2])
+                    tab = np.round((float(wt) - b0)/ b1)
+                    # st.markdown(f'<p style="font-size:24px;">估計顆數：<strong> {int(tab)} 顆</strong> (資料累積中...)</p>', unsafe_allow_html=True)
+                    # st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
+                    if st.button("確定記錄此筆資料", type='primary'):
+                        data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
+                        st.session_state["records"].append(data_ls)
+                    
+                    st.markdown(f'<p style="font-size:24px;">估計顆數：<strong> {int(tab)} 顆</strong> (資料累積中...)</p>', unsafe_allow_html=True)
+                    st.markdown(f'<h5 style="color:mediumblue;font-size:1.2rem;font-weight:normal;">一筆新資料：{x[0][2]} 共：{tab_real}顆 重量：{wt}</h5>', unsafe_allow_html=True)
         except:
-            st.write("資料格式不對！")
+            st.write(f"資料格式不對！")
 except:
     st.write('請確認藥盒編號')
     
