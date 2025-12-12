@@ -51,6 +51,9 @@ try:
             if float(wt):
                 if para.empty:
                     st.markdown(f'<p style="font-size:24px;">暫時無法估計顆數</p>', unsafe_allow_html=True)
+                    if st.button("確定記錄此筆資料", type='primary'):
+                        data_ls = [num, x[0][1], x[0][2], note, tab_real, wt]
+                        st.session_state["records"].append(data_ls)
 
                 # Deming regression
                 else:
