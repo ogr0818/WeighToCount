@@ -18,7 +18,8 @@ def deming_regression(x, y, lambda_ratio=1):
     b0 = y_mean - b1 * x_mean
     return b0.round(4), b1.round(4)
 
-df = pd.read_excel("sum_data.xlsx")
+# df = pd.read_excel("sum_data.xlsx")
+df = pd.read_excel("update_data.xlsx", sheet_name=0)
 df['編號'] = df['編號'].astype('str')
 df['顆數'] = df['顆數'].astype('int')
 
