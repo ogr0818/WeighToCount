@@ -32,3 +32,17 @@ label[data-testid="stWidgetLabel"] {
 .st-emotion-cache-3qzj0x {
     font-size: 34px !important;
 }
+
+/* selectbox 主顯示區文字 */
+div[data-baseweb="select"] > div {
+    font-size: 28px !important;
+    font-weight:500;
+}
+
+/* date_input 主輸入框文字 */
+div[data-testid="stDateInput"] input {
+    font-size: 30px !important;
+    font-weight:500 !important;
+    /* height: 48px !important;
+    line-height: 48px !important; */
+}
