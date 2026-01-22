@@ -9,3 +9,6 @@
 
 ## 稱重滙總：sum_data.xlsx
 ### 滙總在Colab清洗
+
+## 剔除 outliers
+### 雙尾Z-分佈： 中位數加3.5個標準差

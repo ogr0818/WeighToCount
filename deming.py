@@ -31,10 +31,16 @@ df['顆數'] = df['顆數'].astype('int')
 
 # 剔除偏差值
 df['單重'] = df['秤重'] / df['顆數']
-df['mod_z'] = get_outliers_modified_z(df['單重'])
+
 # 判別準則：當 \(M_{i}>3.5\) 時，視為偏差值。依NIST (美國國家標準技術研究所) 的規範
-df['Note'] = df['mod_z'] <= 4.5 
-df_ = df.query('Note == True')
+num_ls = df['編號'].unique()
+df_ = pd.DataFrame()
+for i in num_ls:
+    dfz = df.query('編號 == @i')
+    dfz['mod_z'] = get_outliers_modified_z(dfz['單重'])
+    dfz['Note'] = dfz['mod_z'] <= 3.5
+    df_T = dfz.query('Note == True')
+    df_ = pd.concat([df_, df_T])
 
 drugs = df_['編號'].unique()
 parameters = []
