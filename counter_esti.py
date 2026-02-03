@@ -176,7 +176,7 @@ with tab2:
                                     unsafe_allow_html=True
                                     )
                         
-                        # st.write(f"{((float(wt) - b0)/ b1):.3f}") # 觀察小數後2位
+                        st.write(f"{((float(wt) - b0)/ b1):.3f}") # 觀察小數後2位
             except:
                 st.write(f"資料格式不對！")
     except:
