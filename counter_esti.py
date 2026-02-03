@@ -3,8 +3,8 @@ import pandas as pd
 import streamlit as st
 from io import BytesIO
 from datetime import date
-import re, datetime
-
+import re
+from datetime import datetime, timedelta
 
 tab1, tab2 = st.tabs(["藥包機四級管藥盤點", "藥包機秤重轉顆數"])
 with tab1:
@@ -14,7 +14,7 @@ with tab1:
         
     st.title("藥包機四級管藥盤點")
     machine = st.selectbox("藥包機編號：", ['1 號機', '2 號機'], index=1)
-    diff = datetime.timedelta(days=5)
+    diff = timedelta(days=5)
     min = datetime.today() - diff
     max = datetime.today() + diff
     note = st.date_input(
