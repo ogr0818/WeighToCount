@@ -46,3 +46,12 @@ div[data-testid="stDateInput"] input {
     /* height: 48px !important;
     line-height: 48px !important; */
 }
+
+div[data-testid="stTextInput-box_id"] label {
+    font-size: 36px !important;
+    color: mediumblue !important;
+
+    line-height: 40px !important;
+    max-height: 100px !important;
+    white-space: normal !important;
+}
