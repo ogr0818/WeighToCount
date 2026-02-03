@@ -89,7 +89,7 @@ with tab2:
 
     st.title("藥包機秤重轉顆數")
 
-    machine = st.selectbox("藥包機編號：", ['1 號機', '2 號機'], index=1)   # 加入藥包機編號
+    # machine = st.selectbox("藥包機編號：", ['1 號機', '2 號機'], index=1)   # 加入藥包機編號
     # # 外插日期
     # note = st.date_input(
     #             "目前日期： ",
