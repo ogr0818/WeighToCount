@@ -50,7 +50,7 @@ with tab1:
             num = int(box_id)
             base = base(num)
             st.write(f'藥名：{base[0][2]}')
-            if num == 384:
+            if num == 397:
                 st.markdown(f"""
                             <p style="
                                 font-size:34px; 
@@ -133,8 +133,7 @@ with tab2:
             para = regression.query('編號 == @num')
             
             try:
-                # tab_real = st.text_input("數量： ", value='')   # closed the show
-                tab_real = 0 # 外插預設值
+                tab_real = st.text_input("數量： ", value='')   # closed the show
                 if tab_real == '':
                     tab_real = 0
                 elif int(tab_real):
